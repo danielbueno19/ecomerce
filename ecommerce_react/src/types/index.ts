@@ -1,3 +1,14 @@
+export interface LoginRequest {
+  email: string
+  password: string
+}
+
+export interface RegistroRequest {
+  email: string
+  password: string
+  nombre?: string
+}
+
 export interface ComentarioDTO {
     id: number
     contenido: string
