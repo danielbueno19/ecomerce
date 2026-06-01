@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import CarritoPage from "./pages/CarritoPage";
 import OrdenesPage from "./pages/OrdenesPage";
 import AdminPage from "./pages/AdminPage";
+import RegistroPage from "./pages/RegistroPage";
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 						<Route path="/productos" element={<ProductosPage/>}/>
 						<Route path="/productos/:id" element={<ProductoDetallePage/>}/>
 						<Route path="/login" element={<LoginPage/>}/>
+						<Route path="/registro" element={<RegistroPage/>}/>
 
 						{/* Rutas protegidas: requieren sesión */}
 						<Route element={<PrivateRoute/>}>
