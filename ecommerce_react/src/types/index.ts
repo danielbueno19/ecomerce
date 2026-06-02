@@ -45,3 +45,25 @@ export interface Page<T> {
   number: number  // página actual (base 0)
   size: number
 }
+
+export interface CarritoItemDTO {
+  id: number
+  productoId: number
+  cantidad: number
+}
+
+export interface CarritoDTO {
+  id: number
+  usuarioId: number
+  items: CarritoItemDTO[]
+}
+
+// Item enriquecido: combina CarritoItemDTO con datos del producto para mostrar en UI
+export interface CarritoItemEnriquecido {
+  id: number
+  productoId: number
+  cantidad: number
+  nombre: string
+  precio: number
+  imagen: string | null
+}

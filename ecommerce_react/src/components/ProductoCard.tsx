@@ -6,7 +6,7 @@ interface Props {
 }
 export default function ProductoCard({producto, onVerDetalle}: Props) {
 	return (
-		<div style = {{borde: '1px solid #ccc', padding: '1rem', borderRadius: '8px'}}>
+		<div style = {{border: '1px solid #ccc', padding: '1rem', borderRadius: '8px'}}>
 			{producto.imagen && (
 				<img src={producto.imagen} alt={producto.nombre} width={200}/>
 			)}

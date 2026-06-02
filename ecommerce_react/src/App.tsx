@@ -10,11 +10,13 @@ import CarritoPage from "./pages/CarritoPage";
 import OrdenesPage from "./pages/OrdenesPage";
 import AdminPage from "./pages/AdminPage";
 import RegistroPage from "./pages/RegistroPage";
+import {CarritoProvider} from "./context/CarritoContext";
 
 function App() {
 	return (
 		<AuthProvider>
 			<BrowserRouter>
+				<CarritoProvider>
 				<div style={{padding: '0 2rem'}}>
 					<h1>Ecommerce</h1>
 					<Navbar/>
@@ -39,6 +41,7 @@ function App() {
 						<Route path="*" element={<Navigate to="/productos" replace />}/>
 					</Routes>
 				</div>
+				</CarritoProvider>
 			</BrowserRouter>
 		</AuthProvider>
 	)
