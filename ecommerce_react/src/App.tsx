@@ -11,6 +11,7 @@ import OrdenesPage from "./pages/OrdenesPage";
 import AdminPage from "./pages/AdminPage";
 import RegistroPage from "./pages/RegistroPage";
 import {CarritoProvider} from "./context/CarritoContext";
+import CheckoutPage from "./pages/CheckoutPage";
 
 function App() {
 	return (
@@ -30,6 +31,7 @@ function App() {
 						{/* Rutas protegidas: requieren sesión */}
 						<Route element={<PrivateRoute/>}>
 							<Route path="/carrito" element={<CarritoPage/>}/>
+							<Route path='/checkout' element={<CheckoutPage/>}/>
 							<Route path="/ordenes" element={<OrdenesPage/>}/>
 						</Route>
 
