@@ -84,5 +84,5 @@ export interface OrdenDTO {
   telefono: string
   estado: EstadoOrden
   fechaCreacion: string // LocalDateTime llega como string ISO desde Spring
-  ordenItems: OrdenItemDTO
+  ordenItems: OrdenItemDTO[]
 }
