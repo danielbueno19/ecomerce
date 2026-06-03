@@ -67,3 +67,22 @@ export interface CarritoItemEnriquecido {
   precio: number
   imagen: string | null
 }
+
+export type EstadoOrden = 'PREPARANDO' | 'ENTREGANDO' | 'ENTREGADO' | 'CANCELADO'
+
+export interface OrdenItemDTO {
+  id: number
+  productoId: number
+  cantidad: number
+  precio: number
+}
+
+export interface OrdenDTO {
+  id: number
+  usuarioId: number
+  direccion: string
+  telefono: string
+  estado: EstadoOrden
+  fechaCreacion: string // LocalDateTime llega como string ISO desde Spring
+  ordenItems: OrdenItemDTO
+}
