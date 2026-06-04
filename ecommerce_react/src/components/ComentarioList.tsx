@@ -32,7 +32,7 @@ export default function ComentarioList({productoId}: Props) {
         try {
             const nuevo = await agregarComentario(productoId, {
                 contenido: values.contenido,
-                puntuacion: Number(values.puntuacion)
+                puntuacion: Number(values.puntuacion),
             })
             setComentarios(prev => [nuevo, ...prev]) // agregar al inicio sin recargar
             reset()
@@ -62,7 +62,9 @@ export default function ComentarioList({productoId}: Props) {
                         <textarea
                             name="contenido"
                             value={values.contenido}
+                            onChange={handleChange}
                             placeholder="Escribe tu comentario"
+                            required
                             rows={3}
                             style={{width:'100%'}}
                         />
