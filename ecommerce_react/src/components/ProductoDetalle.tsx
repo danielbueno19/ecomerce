@@ -4,6 +4,7 @@ import {getProducto} from '../services/productos'
 import {useAuth} from "../context/AuthContext";
 import {useCarrito} from "../context/CarritoContext";
 import {useNavigate} from "react-router-dom";
+import ComentarioList from "./ComentarioList";
 
 interface Props {
 	productoId: number
@@ -61,16 +62,7 @@ export default function ProductoDetalle({productoId, onVolver}: Props) {
 				{confirmacion && <p style={{color:'green'}}>✓ Agregado al carrito</p>}
 			</div>
 
-			<section style={{marginTop:'2rem'}}>
-				<h3>Comentarios ({producto.comentarios.length})</h3>
-				{producto.comentarios.length == 0 && <p>Sin comentarios aún.</p>}
-				{producto.comentarios.map(c => (
-					<div key={c.id} style={{borderBottom: '1px solid #eee', padding: '0.5rem 0'}}>
-						<span>{'⭐'.repeat(c.puntuacion)}</span>
-						<p>{c.contenido}</p>
-					</div>
-				))}
-			</section>
+			<ComentarioList productoId={productoId}/>
 		</div>
 	)
 }
