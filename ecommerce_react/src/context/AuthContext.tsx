@@ -25,12 +25,16 @@ export  function AuthProvider({children}: {children: React.ReactNode}) {
         inicializado.current = true
         if (token) {
             obtenerRol()
-                .then(rol => setIsAdmin(rol === 'ROLE_ADMIN'))
+                .then(rol => {
+                    setIsAdmin(rol === 'ADMIN')
+                })
                 .catch(() => {
                     localStorage.removeItem('token')
                     setToken(null)
                 })
                 .finally(() => setCargandoRol(false))
+        } else {
+            setCargandoRol(false)
         }
     }, [])
 
@@ -40,9 +44,9 @@ export  function AuthProvider({children}: {children: React.ReactNode}) {
         localStorage.setItem('token', jwt)
         setToken(jwt)
 
-        // GET /api/auth/usuario/rol → "ROLE_ADMIN" o "ROLE_USER"
+        // GET /api/auth/usuario/rol → "ADMIN" o "USER"
         const rol = await obtenerRol()
-        setIsAdmin(rol === 'ROLE_ADMIN')
+        setIsAdmin(rol === 'ADMIN')
     }
 
     const registrar = async (data: RegistroRequest) => {
