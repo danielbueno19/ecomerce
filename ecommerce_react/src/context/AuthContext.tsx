@@ -1,10 +1,11 @@
-import React, { createContext, useContext, useState } from "react";
+import React, {createContext, useContext, useEffect, useRef, useState} from "react";
 import {login as loginService, registrar as registrarService, obtenerRol} from "../services/auth";
 import {LoginRequest, RegistroRequest} from "../types";
 
 interface AuthContextType {
     token: string | null
     isAdmin: boolean
+    cargandoRol: boolean
     login: (data: LoginRequest) => Promise<void>
     registrar: (data: RegistroRequest) => Promise<void>
     logout: ()=> void
@@ -15,6 +16,23 @@ const AuthContext = createContext<AuthContextType | null>(null)
 export  function AuthProvider({children}: {children: React.ReactNode}) {
     const [token, setToken] = useState<string|null>(localStorage.getItem('token'))
     const [isAdmin, setIsAdmin] = useState(false)
+    const [cargandoRol, setCargandoRol] = useState(!!localStorage.getItem('token'))
+    const inicializado = useRef(false)
+
+    // Corre solo una vez al montar: recupera el rol si ya hay token guardado
+    useEffect(() => {
+        if (inicializado.current) return
+        inicializado.current = true
+        if (token) {
+            obtenerRol()
+                .then(rol => setIsAdmin(rol === 'ROLE_ADMIN'))
+                .catch(() => {
+                    localStorage.removeItem('token')
+                    setToken(null)
+                })
+                .finally(() => setCargandoRol(false))
+        }
+    }, [])
 
     const login = async (data: LoginRequest) => {
         // POST /api/auth/login → devuelve el token como string
@@ -39,8 +57,8 @@ export  function AuthProvider({children}: {children: React.ReactNode}) {
     }
 
     return (
-        <AuthContext.Provider value={{token, isAdmin, login, registrar, logout}}>
-            {children}
+        <AuthContext.Provider value={{token, isAdmin, cargandoRol, login, registrar, logout}}>
+            {cargandoRol ? null: children}
         </AuthContext.Provider>
     )
 }
