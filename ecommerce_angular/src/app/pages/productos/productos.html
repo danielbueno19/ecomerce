@@ -1,0 +1,38 @@
+<div class="catalogo">
+  <h1>Productos</h1>
+  @if(cargando()) {
+    <p>Cargando...</p>
+  }
+  @else if(error()){
+    <p class="error">{{error()}}</p>
+  }
+  @else {
+    <div class="grilla">
+      @for (producto of productos(); track producto.id){
+        <div class="targeta">
+          @if (producto.imagen) {
+            <img [src]="producto.imagen" [alt]="producto.nombre"/>
+          }
+          <h2>{{ producto.nombre }}</h2>
+          <p>{{ producto.descripcion }}</p>
+          <p class="precio">$ {{ producto.price | number: '1.2-2' }}</p>
+          <span [class.agotado]="producto.cantidad === 0">
+            {{ producto.cantidad > 0 ? 'Stock: ' + producto.cantidad : 'Agotado' }}
+          </span>
+          <a [routerLink]="['/productos', producto.id]">Ver detalle</a>
+        </div>
+      }
+    </div>
+
+  <!-- Paginación -->
+  <div class="paginacion">
+    <button (click)="cambiarPagina(paginaActual() - 1)" [disabled]="paginaActual() === 0">
+      Anterior
+    </button>
+    <span>Página {{ paginaActual() + 1 }} de {{ totalPaginas() }}</span>
+    <button (click)="cambiarPagina(paginaActual() + 1)" [disabled]="paginaActual() + 1 >= totalPaginas()">
+      Siguiente
+    </button>
+  </div>
+  }
+</div>

@@ -1,0 +1,34 @@
+<div class="detalle">
+  @if (cargando()){
+    <p>Cargando...</p>
+  }
+  @else if(producto()) {
+    <div class="producto-info">
+      @if (producto()!.imagen){
+        <img [src]="producto()!.imagen" [alt]="producto()!.nombre"/>
+      }
+      <h1>{{ producto()!.nombre }}</h1>
+      <p>{{ producto()!.descripcion }}</p>
+      <p class="precio">$ {{ producto()!.precio | number: '1.2-2' }}</p>
+      <p>Stock disponible: {{ producto()!.cantidad }}</p>
+    </div>
+
+    <!-- Comentarios -->
+    <section class="comentarios">
+      <h2>Comentarios</h2>
+      @if (producto()!.comentarios.length === 0){
+        <p>Sin comentarios aún.</p>
+      }
+      @else {
+        @for (c of producto()!.comentarios; track c.id){
+          <div class="comentario">
+            <span>{{ '★'.repeat(c.puntuacion) }}</span>
+            <p>{{ c.contenido }}</p>
+          </div>
+        }
+      }
+    </section>
+
+    <a [routerLink]="['/productos']">← Volver al catálogo</a>
+  }
+</div>
