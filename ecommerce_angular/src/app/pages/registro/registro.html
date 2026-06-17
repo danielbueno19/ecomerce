@@ -1,0 +1,43 @@
+<div class="auth-container">
+  <h1>Crear cuenta</h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="campo">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email"/>
+      @if (email.touched && email.hasError('required')){
+        <span class="error-campo">El email es requerido</span>
+      } @else if (email.touched && email.hasError('email')){
+        <span class="error-campo">Ingresa un email valido</span>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="password">Contraseña</label>
+      <input id="password" type="password" formControlName="password" />
+      @if (password.touched && password.hasError('required')) {
+      <span class="error-campo">La contraseña es requerida</span>
+      } @else if (password.touched && password.hasError('minlength')) {
+      <span class="error-campo">Mínimo 6 caracteres</span>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="confirmar">Confirmar contraseña</label>
+      <input id="confirmar" type="password" formControlName="confirmar" />
+      <!-- El error "noCoinciden" vive en el grupo, no en el control individual -->
+      @if (confirmar.touched && form.hasError('noCoinciden')) {
+      <span class="error-campo">Las contraseñas no coinciden</span>
+      }
+    </div>
+
+    @if (error()) {
+    <p class="error">{{ error() }}</p>
+    }
+
+    <button type="submit" [disabled]="cargando()">
+      {{ cargando() ? 'Registrando...' : 'Registrarse' }}
+    </button>
+  </form>
+  <p>¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+</div>

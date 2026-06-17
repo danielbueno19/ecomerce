@@ -1,0 +1,11 @@
+<nav>
+  <a routerLink="/productos" routerLinkActive="activo">Productos</a>
+
+  @if (authService.usuarioActual()) {
+  <span>{{ authService.usuarioActual()!.email }}</span>
+  <button (click)="authService.logout()">Cerrar sesión</button>
+  } @else {
+  <a routerLink="/login" routerLinkActive="activo">Ingresar</a>
+  <a routerLink="/registro" routerLinkActive="activo">Registrarse</a>
+  }
+</nav>

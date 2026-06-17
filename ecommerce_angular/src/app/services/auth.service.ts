@@ -16,11 +16,6 @@ export class AuthService {
   // Se inicializa desde localStorage para persistir la sesión al recargar
   usuarioActual = signal<UsuarioSesion | null>(this.cargarSesionGuardada());
 
-  // GET /api/auth/usuario/rol — requiere JWT en el header (lo pone el interceptor)
-  obtenerRol(): Observable<string> {
-    return this.http.get(`${this.base}/usuario/rol`, { responseType: 'text' });
-  }
-
   // POST /api/auth/login — el backend devuelve el JWT como string plano
   login(datos: LoginRequest): Observable<string> {
     return this.http.post(this.base + '/login', datos, { responseType: 'text' }).pipe(
@@ -28,7 +23,7 @@ export class AuthService {
         localStorage.setItem('token', token);
         // Decodificamos el payload del JWT para obtener el email
         // El rol se consulta en un paso separado (ver cargarRolYGuardarSesion)
-        this.cargarRolYGuardarSesion();
+        this.guardarSesionDesdeToken();
       }),
     );
   }
@@ -56,7 +51,7 @@ export class AuthService {
   }
 
   esAdmin() {
-    return this.usuarioActual()?.rol === 'ADMIN'
+    return this.usuarioActual()?.rol === 'ADMIN';
   }
 
   // Restaura la sesión desde localStorage al iniciar la app
@@ -70,27 +65,28 @@ export class AuthService {
     }
   }
 
-  // Consulta el rol al backend y guarda la sesión completa
-  private cargarRolYGuardarSesion() {
-    this.obtenerRol().subscribe((rol) => {
-      const email = this.leerEmailDelToken();
-      if (!email) return;
+  // Lee email y rol del payload JWT y guarda la sesión localmente
+  private guardarSesionDesdeToken() {
+    const payload = this.leerPayLoad();
 
-      const sesion: UsuarioSesion = {
-        email,
-        rol: rol as 'USER' | 'ADMIN',
-      };
-      localStorage.setItem('usuario', JSON.stringify(sesion));
-      this.usuarioActual.set(sesion);
-    });
+    if (!payload) return;
+
+    const email = String(payload['sub'] ?? '');
+    // El backend guarda "ROLE_USER" o "ROLE_ADMIN" en el claim "rol"
+    const rol = String(payload['rol'] ?? '').replace('ROLE_','') as 'USER' | 'ADMIN';
+
+    if (!email || !rol) return;
+
+    const session: UsuarioSesion = {email, rol};
+    localStorage.setItem('usuario', JSON.stringify(session));
+    this.usuarioActual.set(session);
   }
 
-  private leerEmailDelToken(): string | null {
+  private leerPayLoad(): Record<string, unknown> | null {
     const token = localStorage.getItem('token');
     if (!token) return null;
     try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      return payload.sub ?? null; // Spring Security guarda el email en "sub"
+      return JSON.parse(atob(token.split('.')[1]));
     } catch {
       return null;
     }

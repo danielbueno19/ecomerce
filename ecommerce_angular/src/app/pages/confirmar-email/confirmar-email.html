@@ -1,0 +1,27 @@
+<div class="auth-container">
+  <h1>Confirmar email</h1>
+  <p>Revisa tu correo electrónico hemos enviado el código de verificación</p>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="campo">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" />
+    </div>
+
+    <div class="campo">
+      <label for="codigo">Código de confirmación</label>
+      <input id="codigo" type="text" formControlName="codigoConfirmacion" />
+      @if (codigo.touched && codigo.hasError('required')) {
+      <span class="error-campo">El código es requerido</span>
+      }
+    </div>
+
+    @if (error()) {
+    <p class="error">{{ error() }}</p>
+    }
+
+    <button type="submit" [disabled]="cargando()">
+      {{ cargando() ? 'Verificando...' : 'Confirmar' }}
+    </button>
+  </form>
+</div>
