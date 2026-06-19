@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -9,4 +9,10 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent {
   readonly authService = inject(AuthService);
+  private readonly route = inject(Router);
+
+  logout() {
+    this.authService.logout();
+    this.route.navigate(['/productos']);
+  }
 }
