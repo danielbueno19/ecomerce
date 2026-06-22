@@ -1,0 +1,40 @@
+<div class="carrito">
+  <h1>Mi carrito</h1>
+
+  @if (carritoService.items().length === 0) {
+  <p>El carrito está vacío. <a routerLink="/productos">Ver productos</a></p>
+  } @else {
+  <table>
+    <thead>
+    <tr>
+      <th>Producto</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Subtotal</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @for (item of carritoService.items(); track item.itemId) {
+    <tr>
+      <td>
+        <a [routerLink]="['/productos', item.productoId]">{{ item.nombre }}</a>
+      </td>
+      <td>$ {{ item.precio | number: '1.2-2' }}</td>
+      <td>{{ item.cantidad }}</td>
+      <td>$ {{ item.subtotal | number: '1.2-2' }}</td>
+      <td>
+        <button (click)="remover(item.productoId)">Eliminar</button>
+      </td>
+    </tr>
+    }
+    </tbody>
+  </table>
+
+  <div class="resumen">
+    <strong>Total: $ {{ carritoService.total() | number: '1.2-2' }}</strong>
+    <button (click)="vaciar()">Vaciar carrito</button>
+    <a routerLink="/ordenes">Confirmar orden →</a>
+  </div>
+  }
+</div>

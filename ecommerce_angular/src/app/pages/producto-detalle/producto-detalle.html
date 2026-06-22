@@ -13,6 +13,25 @@
       <p>Stock disponible: {{ producto()!.cantidad }}</p>
     </div>
 
+    <!-- Agregar al carrito — solo visible si hay sesión activa -->
+    @if (authService.estaAutenticado()) {
+      <div class="agregar-carrito">
+        <button (click)="decrementar()" [disabled]="cantidad() === 1">-</button>
+        <span>{{ cantidad() }}</span>
+        <button (click)="incrementar()" [disabled]="cantidad() === producto()!.cantidad">+</button>
+
+        <button (click)="agregarAlCarrito()" [disabled]="producto()!.cantidad === 0">
+          {{ producto()!.cantidad === 0 ? 'Sin stock': 'Agregar al carrito' }}
+        </button>
+
+        @if (agregado()){
+          <span class="confirmacion">✓ Agregado</span>
+        }
+      </div>
+    } @else {
+      <p><a routerLink="/login">Inicia sesión</a> para agregar al carrito</p>
+    }
+
     <!-- Comentarios -->
     <section class="comentarios">
       <h2>Comentarios</h2>
@@ -29,6 +48,6 @@
       }
     </section>
 
-    <a [routerLink]="['/productos']">← Volver al catálogo</a>
+    <a routerLink="/productos">← Volver al catálogo</a>
   }
 </div>

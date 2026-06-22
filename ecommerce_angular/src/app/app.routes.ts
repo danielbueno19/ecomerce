@@ -21,7 +21,7 @@ export const routes: Routes = [
   {
     path: 'carrito',
     canActivate: [authGuard],
-    loadComponent: () => import('./pages/productos/productos').then((m) => m.ProductosPage),
+    loadComponent: () => import('./pages/carrito/carrito').then((m) => m.CarritoPage),
   },
   {
     path: 'ordenes',
@@ -30,5 +30,9 @@ export const routes: Routes = [
   },
 
   // Rutas admin — requieren rol ADMIN
-  { path: 'admin', canActivate: [adminGuard], loadComponent: ()=> import('./pages/productos/productos').then(m => m.ProductosPage)}
+  {
+    path: 'admin',
+    canActivate: [adminGuard],
+    loadComponent: () => import('./pages/productos/productos').then(m => m.ProductosPage)
+  }
 ];

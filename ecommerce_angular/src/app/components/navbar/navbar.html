@@ -3,7 +3,12 @@
 
   @if (authService.usuarioActual()) {
   <!-- Links disponibles solo con sesión activa -->
-  <a routerLink="/carrito" routerLinkActive="activo">Carrito</a>
+  <a routerLink="/carrito" routerLinkActive="activo">
+    Carrito
+    @if (carritoService.cantidadItems() > 0){
+      <span class="badge">{{ carritoService.cantidadItems() }}</span>
+    }
+  </a>
   <a routerLink="/ordenes" routerLinkActive="activo">Mis órdenes</a>
 
   <!-- Link de admin: visible solo si el rol es ADMIN -->
