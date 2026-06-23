@@ -1,0 +1,47 @@
+<div class="checkout">
+  <h1>Confirmar Orden</h1>
+
+  <!-- Resumen del carrito -->
+  <section class="resumen">
+    <h2>Resumen</h2>
+    @for (item of items(); track item.itemId) {
+    <div class="resumen-item">
+      <span>{{ item.nombre }} x{{ item.cantidad }}</span>
+      <span>$ {{ item.subtotal | number: '1.2-2' }}</span>
+    </div>
+    }
+    <strong>Total: $ {{ total() | number: '1.2-2' }}</strong>
+  </section>
+
+  <!-- Formulario de envío -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h2>Datos de envío</h2>
+
+    <div class="campo">
+      <label for="direccion">Dirección</label>
+      <input id="direccion" type="text" formControlName="direccion" />
+      @if (direccion.touched && direccion.hasError('required')) {
+      <span class="error-campo">La dirección es requerida</span>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="telefono">Teléfono</label>
+      <input id="telefono" type="text" formControlName="telefono" />
+      @if (telefono.touched && telefono.hasError('required')) {
+      <span class="error-campo">El teléfono es requerido</span>
+      }
+    </div>
+
+    @if (error()) {
+    <p class="error">{{ error() }}</p>
+    }
+
+    <button type="submit" [disabled]="cargando() || items().length === 0">
+      {{ cargando() ? 'Procesando...' : 'Confirmar orden' }}
+    </button>
+
+    <a routerLink="/carrito">← Volver al carrito</a>
+  </form>
+
+</div>

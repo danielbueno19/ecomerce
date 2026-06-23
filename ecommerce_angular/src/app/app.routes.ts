@@ -24,9 +24,14 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/carrito/carrito').then((m) => m.CarritoPage),
   },
   {
+    path: 'checkout',
+    canActivate: [authGuard],
+    loadComponent: ()=> import('./pages/checkout/checkout').then(m => m.CheckoutPages)
+  },
+  {
     path: 'ordenes',
     canActivate: [authGuard],
-    loadComponent: () => import('./pages/productos/productos').then((m) => m.ProductosPage),
+    loadComponent: () => import('./pages/ordenes/ordenes').then((m) => m.OrdenesPage),
   },
 
   // Rutas admin — requieren rol ADMIN

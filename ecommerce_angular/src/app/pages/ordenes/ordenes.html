@@ -1,0 +1,33 @@
+<div class="ordenes">
+  <h1>Mis órdenes</h1>
+
+  @if (cargando()) {
+  <p>Cargando...</p>
+  } @else if (error()) {
+  <p class="error">{{ error() }}</p>
+  } @else if (ordenes().length === 0) {
+  <p>No tenés órdenes aún. <a routerLink="/productos">Ver productos</a></p>
+  } @else {
+  @for (orden of ordenes(); track orden.id) {
+  <!-- Destaca visualmente la orden recién creada -->
+  <div class="orden" [class.nueva]="orden.id === nuevaOrdenId()">
+    <div class="orden-header">
+      <span>Orden #{{ orden.id }}</span>
+      <span class="estado estado-{{ orden.estado.toLowerCase() }}">{{ orden.estado }}</span>
+      <span>{{ orden.fechaCreacion | date: 'dd/MM/yyyy HH:mm' }}</span>
+    </div>
+
+    <div class="orden-detalle">
+      <p>📍 {{ orden.direccion }} · 📞 {{ orden.telefono }}</p>
+      @for (item of orden.ordenItems; track item.id) {
+      <div class="orden-item">
+        <span>Producto #{{ item.productoId }} x{{ item.cantidad }}</span>
+        <span>$ {{ item.precio * item.cantidad | number: '1.2-2' }}</span>
+      </div>
+      }
+      <strong>Total: $ {{ calcularTotal(orden) | number: '1.2-2' }}</strong>
+    </div>
+  </div>
+  }
+  }
+</div>

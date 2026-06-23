@@ -5,23 +5,35 @@ import { ProductoService } from '../../services/producto.service';
 import { Producto } from '../../models/producto.model';
 import { CarritoService } from '../../services/carrito.service';
 import { AuthService } from '../../services/auth.service';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ComentarioService } from '../../services/comentario.service';
+import { Comentario } from '../../models/comentario.model';
 
 @Component({
   selector: 'app-producto-detalle',
-  imports: [RouterLink, DecimalPipe],
+  imports: [RouterLink, DecimalPipe, ReactiveFormsModule],
   templateUrl: './producto-detalle.html',
 })
 export class ProductoDetallePage implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly productoService = inject(ProductoService);
   private readonly carritoService = inject(CarritoService);
+  private readonly comentarioService = inject(ComentarioService);
+  private readonly fb = inject(FormBuilder);
   readonly authService = inject(AuthService);
 
   producto = signal<Producto | null>(null);
+  comentarios = signal<Comentario[]>([])
   cargando = signal(true);
   error = signal<string | null>(null)
   cantidad = signal(1);
   agregado = signal(false)
+  enviandoComentario = signal(false);
+
+  formComentario = this.fb.group({
+    contenido: ['', Validators.required],
+    puntuacion: [5, [Validators.required, Validators.min(1), Validators.max(5)]],
+  });
 
   ngOnInit(): void {
     // ActivatedRoute.snapshot.params lee el :id de la URL
@@ -35,6 +47,34 @@ export class ProductoDetallePage implements OnInit {
         this.error.set('Producto no encontrado');
         this.cargando.set(false)
       },
+    });
+    this.cargarComentarios(id);
+  }
+
+  cargarComentarios(productoId: number){
+    this.comentarioService.obtenerPorProducto(productoId).subscribe({
+      next: data => this.comentarios.set(data),
+    })
+  }
+
+  enviarComentario(): void {
+    if (this.formComentario.invalid) {
+      this.formComentario.markAllAsTouched();
+      return;
+    }
+    const id = this.producto()?.id;
+    if (!id) return;
+
+    this.enviandoComentario.set(true);
+    const { contenido, puntuacion } = this.formComentario.getRawValue();
+
+    this.comentarioService.agregar(id, { contenido: contenido!, puntuacion: puntuacion! }).subscribe({
+      next: () => {
+        this.formComentario.reset({ contenido: '', puntuacion: 5 });
+        this.cargarComentarios(id);
+        this.enviandoComentario.set(false);
+      },
+      error: () => this.enviandoComentario.set(false),
     });
   }
 
@@ -61,4 +101,7 @@ export class ProductoDetallePage implements OnInit {
     const prod = this.producto();
     if (this.cantidad() > 1) this.cantidad.update(cant => cant - 1);
   }
+
+  get contenido() {return this.formComentario.controls.contenido}
+  get puntuacion(){return this.formComentario.controls.puntuacion}
 }
