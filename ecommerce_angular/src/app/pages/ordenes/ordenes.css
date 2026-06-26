@@ -1,0 +1,143 @@
+.ordenes {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.ordenes h1 {
+  font-size: 1.8rem;
+  color: #1a1a2e;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #e94560;
+  padding-left: 0.75rem;
+}
+
+.ordenes > p {
+  color: #555;
+}
+
+.ordenes > p a {
+  color: #e94560;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.ordenes > p a:hover {
+  text-decoration: underline;
+}
+
+.error {
+  color: #e94560;
+  background: #fff0f3;
+  border: 1px solid #e94560;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
+
+/* Card de orden */
+.orden {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  border-left: 4px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.orden.nueva {
+  border-left-color: #2e7d32;
+  background: #f6fff6;
+}
+
+/* Header de la orden */
+.orden-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.25rem;
+  background: #f8f9fa;
+  border-bottom: 1px solid #f0f0f0;
+  flex-wrap: wrap;
+}
+
+.orden-header span:first-child {
+  font-weight: 700;
+  color: #1a1a2e;
+  font-size: 0.95rem;
+}
+
+.orden-header span:last-child {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* Badge de estado */
+.estado {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.estado-pendiente {
+  background: #fff8e1;
+  color: #f57f17;
+}
+
+.estado-confirmada {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.estado-enviada {
+  background: #e8eaf6;
+  color: #283593;
+}
+
+.estado-entregada {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.estado-cancelada {
+  background: #fce4ec;
+  color: #c62828;
+}
+
+/* Detalle de la orden */
+.orden-detalle {
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.orden-detalle > p {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0 0 0.25rem;
+}
+
+.orden-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  color: #444;
+  padding: 0.3rem 0;
+  border-bottom: 1px dashed #f0f0f0;
+}
+
+.orden-item:last-of-type {
+  border-bottom: none;
+}
+
+.orden-detalle strong {
+  font-size: 1rem;
+  color: #1a1a2e;
+  text-align: right;
+  margin-top: 0.25rem;
+}

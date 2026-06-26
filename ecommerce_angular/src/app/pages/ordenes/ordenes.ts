@@ -8,6 +8,7 @@ import { Orden } from '../../models/orden.model';
   selector: 'app-ordenes',
   imports: [RouterLink, DecimalPipe, DatePipe],
   templateUrl: './ordenes.html',
+  styleUrl: './ordenes.css',
 })
 export class OrdenesPage implements OnInit {
   private readonly ordenService = inject(OrdenService);
