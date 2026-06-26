@@ -24,7 +24,7 @@
       <td>{{ item.cantidad }}</td>
       <td>$ {{ item.subtotal | number: '1.2-2' }}</td>
       <td>
-        <button (click)="remover(item.productoId)">Eliminar</button>
+        <button class="btn-eliminar" (click)="remover(item.productoId)">Eliminar</button>
       </td>
     </tr>
     }
@@ -33,7 +33,7 @@
 
   <div class="resumen">
     <strong>Total: $ {{ carritoService.total() | number: '1.2-2' }}</strong>
-    <button (click)="vaciar()">Vaciar carrito</button>
+    <button class="btn-vaciar" (click)="vaciar()">Vaciar carrito</button>
     <a routerLink="/ordenes">Confirmar orden →</a>
   </div>
   }

@@ -6,7 +6,8 @@ import { DecimalPipe } from '@angular/common';
 @Component({
   selector: 'app-carrito',
   imports: [RouterLink, DecimalPipe],
-  templateUrl: './carrito.html'
+  templateUrl: './carrito.html',
+  styleUrl: './carrito.css'
 })
 export class CarritoPage implements OnInit{
   readonly carritoService = inject(CarritoService);
