@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import './App.css'
 import { AuthProvider } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
@@ -18,9 +19,11 @@ function App() {
 		<AuthProvider>
 			<BrowserRouter>
 				<CarritoProvider>
-				<div style={{padding: '0 2rem'}}>
+				<header className="header">
 					<h1>Ecommerce</h1>
 					<Navbar/>
+				</header>
+				<main className="main">
 					<Routes>
 						{/* Rutas públicas */}
 						<Route path="/productos" element={<ProductosPage/>}/>
@@ -42,7 +45,7 @@ function App() {
 
 						<Route path="*" element={<Navigate to="/productos" replace />}/>
 					</Routes>
-				</div>
+				</main>
 				</CarritoProvider>
 			</BrowserRouter>
 		</AuthProvider>
