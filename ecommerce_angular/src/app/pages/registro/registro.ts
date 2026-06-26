@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-registro',
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './registro.html',
+  styleUrl: '../auth.css',
 })
 export class RegistroPage {
   private readonly fb = inject(FormBuilder);
