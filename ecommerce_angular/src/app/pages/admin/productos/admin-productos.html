@@ -74,8 +74,8 @@
         <td>$ {{ p.price | number: '1.2-2' }}</td>
         <td>{{ p.cantidad }}</td>
         <td>
-          <button (click)="editarProducto(p.id)">Editar</button>
-          <button (click)="eliminar(p.id)">Eliminar</button>
+          <button class="btn-editar" (click)="editarProducto(p.id)">Editar</button>
+          <button class="btn-eliminar" (click)="eliminar(p.id)">Eliminar</button>
         </td>
       </tr>
       }

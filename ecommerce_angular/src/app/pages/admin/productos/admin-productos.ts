@@ -8,6 +8,7 @@ import { DecimalPipe } from '@angular/common';
   selector: 'app-admin-productos',
   imports: [ReactiveFormsModule, DecimalPipe],
   templateUrl: './admin-productos.html',
+  styleUrl: '../admin.css',
 })
 export class AdminProductosPage implements OnInit {
   private readonly fb = inject(FormBuilder);

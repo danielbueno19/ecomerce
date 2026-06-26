@@ -8,6 +8,7 @@ import { EstadoOrden, Orden } from '../../../models/orden.model';
   selector: 'app-admin-ordenes',
   imports: [DecimalPipe, DatePipe, FormsModule],
   templateUrl: './admin-ordenes.html',
+  styleUrl: '../admin.css',
 })
 export class AdminOrdenesPage implements OnInit {
   private readonly ordenService = inject(OrdenService);
