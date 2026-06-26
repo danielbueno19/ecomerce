@@ -1,0 +1,86 @@
+<div class="admin-productos">
+  <h1>Gestión de productos</h1>
+
+  <!-- Formulario crear / editar -->
+  <section class="form-seccion">
+    <h2>{{ editandoId() ? 'Editar producto #' + editandoId() : 'Nuevo producto' }}</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="campo">
+        <label>Nombre</label>
+        <input type="text" formControlName="nombre"/>
+        @if (nombre.touched && nombre.hasError('required')){
+          <span class="error-campo">Requerido</span>
+        }
+      </div>
+
+      <div class="campo">
+        <label>Descripción</label>
+        <textarea formControlName="descripcion" rows="3"></textarea>
+        @if (descripcion.touched && descripcion.hasError('required')) {
+        <span class="error-campo">Requerido</span>
+        }
+      </div>
+
+      <div class="campo">
+        <label>Precio</label>
+        <input type="number" formControlName="precio" step="0.01" />
+        @if (precio.touched && precio.hasError('min')) {
+        <span class="error-campo">Debe ser mayor a 0</span>
+        }
+      </div>
+
+      <div class="campo">
+        <label>Stock</label>
+        <input type="number" formControlName="cantidad" />
+      </div>
+
+      <div class="campo">
+        <label>Imagen (opcional)</label>
+        <input type="file" accept="image/*" (change)="onImagenSeleccionada($event)"/>
+      </div>
+
+      @if (error()) { <p class="error">{{ error() }}</p> }
+      @if (exito()) { <p class="exito">{{ exito() }}</p> }
+
+      <button type="submit" [disabled]="guardando()">
+        {{ guardando() ? 'Guardando...' : (editandoId() ? 'Actualizar' : 'Crear producto') }}
+      </button>
+
+      @if (editandoId()) {
+      <button type="button" (click)="cancelarEdicion()">Cancelar</button>
+      }
+    </form>
+  </section>
+
+  <!-- Tabla de productos -->
+  <section class="lista-seccion">
+    <h2>Productos existentes</h2>
+
+    @if (cargando()) {
+    <p>Cargando...</p>
+    } @else {
+    <table>
+      <thead>
+      <tr>
+        <th>#</th><th>Nombre</th><th>Precio</th><th>Stock</th><th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      @for (p of productos(); track p.id) {
+      <tr [class.editando]="p.id === editandoId()">
+        <td>{{ p.id }}</td>
+        <td>{{ p.nombre }}</td>
+        <td>$ {{ p.price | number: '1.2-2' }}</td>
+        <td>{{ p.cantidad }}</td>
+        <td>
+          <button (click)="editarProducto(p.id)">Editar</button>
+          <button (click)="eliminar(p.id)">Eliminar</button>
+        </td>
+      </tr>
+      }
+      </tbody>
+    </table>
+    }
+  </section>
+</div>

@@ -17,7 +17,7 @@ export const routes: Routes = [
   { path: 'registro', component: RegistroPage },
   { path: 'confirmar-email', component: ConfirmarEmailPage },
 
-  // Rutas protegidas - requieren sesión activa (estar logeado)
+  // Rutas protegidas - requieren sesión activa (estar logueado)
   {
     path: 'carrito',
     canActivate: [authGuard],
@@ -26,7 +26,7 @@ export const routes: Routes = [
   {
     path: 'checkout',
     canActivate: [authGuard],
-    loadComponent: ()=> import('./pages/checkout/checkout').then(m => m.CheckoutPages)
+    loadComponent: () => import('./pages/checkout/checkout').then((m) => m.CheckoutPages),
   },
   {
     path: 'ordenes',
@@ -38,6 +38,13 @@ export const routes: Routes = [
   {
     path: 'admin',
     canActivate: [adminGuard],
-    loadComponent: () => import('./pages/productos/productos').then(m => m.ProductosPage)
-  }
+    loadComponent: () => import('./pages/admin/admin').then((m) => m.AdminPage),
+    // children: rutas hijas que se renderizan dentro del <router-outlet> de AdminPage
+    children: [
+      {path:'productos', loadComponent: () => import('./pages/admin/productos/admin-productos')
+          .then(m => m.AdminProductosPage)},
+      {path:'ordenes', loadComponent: ()=> import('./pages/admin/ordenes/admin-ordenes')
+          .then(m=> m.AdminOrdenesPage)},
+    ]
+  },
 ];

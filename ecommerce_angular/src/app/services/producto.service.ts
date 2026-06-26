@@ -11,12 +11,27 @@ export class ProductoService {
   // GET /api/productos?page=0&size=10
   getProductos(page = 0, size = 10): Observable<Page<ProductoList>> {
     const params = new HttpParams().set('page', page).set('size', size);
-    return this.http.get<Page<ProductoList>>(this.base, {params});
+    return this.http.get<Page<ProductoList>>(this.base, { params });
   }
 
   // GET /api/productos/:id
   getProducto(id: number): Observable<Producto> {
     return this.http.get<Producto>(`${this.base}/${id}`);
+  }
+
+  // PUT /api/productos/:id — multipart/form-data (solo ADMI
+  actualizarProducto(id: number, formData: FormData): Observable<Producto> {
+    return this.http.put<Producto>(`${this.base}/${id}`, formData);
+  }
+
+  // POST /api/productos — multipart/form-data (solo ADMIN)
+  crearProducto(formData: FormData): Observable<Producto> {
+    return this.http.post<Producto>(`${this.base}`, formData);
+  }
+
+  // DELETE /api/productos/:id (solo ADMIN)
+  eliminarProducto(id: number): Observable<void>{
+    return this.http.delete<void>(`${this.base}/${id}`);
   }
 }
 

@@ -1,0 +1,44 @@
+<div class="admin-ordenes">
+  <h1>Gestión de órdenes</h1>
+
+  @if (cargando()) {
+  <p>Cargando...</p>
+  } @else if (ordenes().length === 0) {
+  <p>No hay órdenes registradas.</p>
+  } @else {
+  <table>
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Usuario</th>
+      <th>Dirección</th>
+      <th>Fecha</th>
+      <th>Total</th>
+      <th>Estado</th>
+    </tr>
+    </thead>
+    <tbody>
+    @for (orden of ordenes(); track orden.id) {
+    <tr>
+      <td>{{ orden.id }}</td>
+      <td>Usuario #{{ orden.usuarioId }}</td>
+      <td>{{ orden.direccion }}</td>
+      <td>{{ orden.fechaCreacion | date: 'dd/MM/yyyy HH:mm' }}</td>
+      <td>$ {{ calcularTotal(orden) | number: '1.2-2' }}</td>
+      <td>
+        <!-- select vinculado con ngModel (FormsModule) -->
+        <!-- al cambiar llama cambiarEstado() pasando el valor seleccionado -->
+        <select
+          [ngModel]="orden.estado"
+          (ngModelChange)="cambiarEstado(orden, $event)">
+          @for (estado of estados; track estado) {
+          <option [value]="estado">{{ estado }}</option>
+          }
+        </select>
+      </td>
+    </tr>
+    }
+    </tbody>
+  </table>
+  }
+</div>
