@@ -1,0 +1,65 @@
+.page {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.resumen {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.resumen h3 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.resumenFila {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-xs) 0;
+  font-size: 0.9rem;
+}
+
+.resumenTotal {
+  display: flex;
+  justify-content: space-between;
+  padding-top: var(--spacing-sm);
+  margin-top: var(--spacing-xs);
+  border-top: 1px solid var(--color-border);
+  font-weight: 700;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.error {
+  color: var(--color-danger);
+  font-size: 0.875rem;
+}
+
+.acciones {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.btnVolver {
+  background-color: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+.btnVolver:hover {
+  background-color: var(--color-border);
+  color: var(--color-text);
+}

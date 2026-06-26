@@ -1,11 +1,5 @@
 import {EstadoOrden, OrdenDTO} from "../types";
-
-const colorEstado: Record<EstadoOrden, string> = {
-    PREPARANDO: '#f59e0b',
-    ENTREGANDO: '#3b82f6',
-    ENTREGADO:  '#22c55e',
-    CANCELADO:  '#ef4444',
-}
+import styles from './OrdenCard.module.css'
 
 interface Props {
     orden: OrdenDTO
@@ -22,58 +16,41 @@ export default function OrdenCard({orden, destacada = false}: Props) {
     )
 
     return (
-        <div style={{
-            border: destacada ? '2px solid #22c55e' : '1px solid #e5e7eb',
-            borderRadius: 8,
-            padding: '1rem',
-            marginBottom: '1rem',
-        }}>
-            {destacada && (
-                <p style={{ color: '#22c55e', margin: '0 0 0.5rem', fontWeight: 'bold' }}>
-                    ✓ Orden creada exitosamente
-                </p>
-            )}
+        <div className={`${styles.card} ${destacada ? styles.cardDestacada : ''}`}>
+            {destacada && <p className={styles.confirmacion}>✓ Orden creada exitosamente</p>}
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontWeight: 'bold' }}>Orden #{orden.id}</span>
-                <span style={{
-                    background: colorEstado[orden.estado],
-                    color: '#fff',
-                    padding: '0.2rem 0.6rem',
-                    borderRadius: 999,
-                    fontSize: '0.8rem',
-                }}>
-                  {orden.estado}
+            <div className={styles.header}>
+                <span className={styles.titulo}>Orden #{orden.id}</span>
+                <span className={`${styles.badge} ${styles[`badge${orden.estado as EstadoOrden}`]}`}>
+                    {orden.estado}
                 </span>
             </div>
 
-            <p style={{ color: '#6b7280', margin: '0.25rem 0' }}>{fecha}</p>
-            <p style={{ margin: '0.25rem 0' }}>
-                📍 {orden.direccion} · 📞 {orden.telefono}
-            </p>
+            <p className={styles.fecha}>{fecha}</p>
+            <p className={styles.direccion}>📍 {orden.direccion} · 📞 {orden.telefono}</p>
 
-            <table style={{ width: '100%', marginTop: '0.75rem', borderCollapse: 'collapse' }}>
+            <table className={styles.tabla}>
                 <thead>
-                <tr style={{ borderBottom: '1px solid #e5e7eb', textAlign: 'left' }}>
-                    <th style={{ padding: '0.25rem 0', fontWeight: 'normal', color: '#6b7280' }}>Producto</th>
-                    <th style={{ padding: '0.25rem 0', fontWeight: 'normal', color: '#6b7280' }}>Cant.</th>
-                    <th style={{ padding: '0.25rem 0', fontWeight: 'normal', color: '#6b7280', textAlign: 'right' }}>Subtotal</th>
-                </tr>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cant.</th>
+                        <th>Subtotal</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {orden.ordenItems.map(item => (
-                    <tr key={item.id}>
-                        <td style={{ padding: '0.25rem 0' }}>Producto #{item.productoId}</td>
-                        <td>{item.cantidad}</td>
-                        <td style={{ textAlign: 'right' }}>${(item.precio * item.cantidad).toFixed(2)}</td>
-                    </tr>
-                ))}
+                    {orden.ordenItems.map(item => (
+                        <tr key={item.id}>
+                            <td>Producto #{item.productoId}</td>
+                            <td>{item.cantidad}</td>
+                            <td>${(item.precio * item.cantidad).toFixed(2)}</td>
+                        </tr>
+                    ))}
                 </tbody>
                 <tfoot>
-                <tr style={{ borderTop: '1px solid #e5e7eb', fontWeight: 'bold' }}>
-                    <td colSpan={2} style={{ paddingTop: '0.5rem' }}>Total</td>
-                    <td style={{ textAlign: 'right', paddingTop: '0.5rem' }}>${totalOrden.toFixed(2)}</td>
-                </tr>
+                    <tr className={styles.tablaFooter}>
+                        <td colSpan={2}>Total</td>
+                        <td>${totalOrden.toFixed(2)}</td>
+                    </tr>
                 </tfoot>
             </table>
         </div>

@@ -1,0 +1,81 @@
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  background-color: var(--color-bg-card);
+}
+
+.cardDestacada {
+  border: 2px solid var(--color-success);
+}
+
+.confirmacion {
+  color: var(--color-success);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titulo {
+  font-weight: 700;
+}
+
+.badge {
+  color: #fff;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badgePREPARANDO { background-color: #f59e0b; }
+.badgeENTREGANDO { background-color: #3b82f6; }
+.badgeENTREGADO  { background-color: var(--color-success); }
+.badgeCANCELADO  { background-color: var(--color-danger); }
+
+.fecha {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  margin: var(--spacing-xs) 0;
+}
+
+.direccion {
+  font-size: 0.875rem;
+  margin: var(--spacing-xs) 0;
+}
+
+.tabla {
+  width: 100%;
+  margin-top: var(--spacing-md);
+  border-collapse: collapse;
+}
+
+.tabla th {
+  padding: var(--spacing-xs) 0;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tabla th:last-child,
+.tabla td:last-child {
+  text-align: right;
+}
+
+.tabla td {
+  padding: var(--spacing-xs) 0;
+  font-size: 0.875rem;
+}
+
+.tablaFooter td {
+  padding-top: var(--spacing-sm);
+  font-weight: 700;
+  border-top: 1px solid var(--color-border);
+}

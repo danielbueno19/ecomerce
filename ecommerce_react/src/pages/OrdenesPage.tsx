@@ -3,6 +3,7 @@ import {OrdenDTO} from "../types";
 import {useLocation, useNavigate} from "react-router-dom";
 import {obtenerOrdenesUsuario} from "../services/ordenes";
 import OrdenCard from "../components/OrdenCard";
+import styles from './OrdenesPage.module.css'
 
 export default function OrdenesPage() {
     const [ordenes, setOrdenes] = useState<OrdenDTO[]>([])
@@ -11,7 +12,6 @@ export default function OrdenesPage() {
     const location = useLocation()
     const navigate = useNavigate()
 
-    // ID de la orden recién creada, viene del navigate() en CheckoutPage
     const ordenRecienCreada: number | undefined = location.state?.ordenId
 
     useEffect(()=> {
@@ -24,14 +24,14 @@ export default function OrdenesPage() {
     }, [])
 
     if (loading) return <p>Cargando órdenes</p>
-    if (error) return <p style={{color:'red'}}>{error}</p>
+    if (error) return <p className={styles.error}>{error}</p>
 
     return (
-        <div style={{ maxWidth: 600, margin: '0 auto' }}>
+        <div className={styles.page}>
             <h2>Mis órdenes</h2>
 
             {ordenes.length === 0 ? (
-                <div>
+                <div className={styles.vacio}>
                     <p>Todavía no tenés órdenes.</p>
                     <button onClick={() => navigate('/productos')}>Ver productos</button>
                 </div>

@@ -1,0 +1,17 @@
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-xl) 0;
+  color: var(--color-text-muted);
+}
+
+.error {
+  color: var(--color-danger);
+}
