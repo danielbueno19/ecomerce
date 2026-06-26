@@ -5,6 +5,7 @@ import {useAuth} from "../context/AuthContext";
 import {useCarrito} from "../context/CarritoContext";
 import {useNavigate} from "react-router-dom";
 import ComentarioList from "./ComentarioList";
+import styles from './ProductoDetalle.module.css'
 
 interface Props {
 	productoId: number
@@ -42,24 +43,26 @@ export default function ProductoDetalle({productoId, onVolver}: Props) {
 		}
 	}
 
-	if (loading) return <p>Cargando...</p>
-	if (error) return <p>{error}</p>
+	if (loading) return <p className={styles.mensaje}>Cargando...</p>
+	if (error) return <p className={styles.mensaje}>{error}</p>
 	if (!producto) return null
 
 	return (
-		<div>
-			<button onClick={onVolver}>← Volver</button>
+		<div className={styles.container}>
+			<button className={styles.btnVolver} onClick={onVolver}>← Volver</button>
 
-			<div style={{marginTop:'1rem'}}>
-				{producto.imagen && (<img src={producto.imagen} alt={producto.nombre} width={300}/>)}
-				<h2>{producto.nombre}</h2>
-				<p>{producto.descripcion}</p>
-				<p><strong>Precio: ${producto.precio}</strong></p>
-				<p>Stock disponible: {producto.cantidad}</p>
-				<button onClick={handleAgregar} disabled={agregando || producto.cantidad === 0}>
-					{agregando ? 'Agregando': 'Agregar al carrito'}
-				</button>
-				{confirmacion && <p style={{color:'green'}}>✓ Agregado al carrito</p>}
+			<div className={styles.detalle}>
+				{producto.imagen && <img src={producto.imagen} alt={producto.nombre} className={styles.imagen}/>}
+				<div className={styles.info}>
+					<h2>{producto.nombre}</h2>
+					<p>{producto.descripcion}</p>
+					<p className={styles.precio}>${producto.precio}</p>
+					<p className={styles.stock}>Stock disponible: {producto.cantidad}</p>
+					<button className={styles.btnCarrito} onClick={handleAgregar} disabled={agregando || producto.cantidad === 0}>
+						{agregando ? 'Agregando...' : 'Agregar al carrito'}
+					</button>
+					{confirmacion && <p className={styles.confirmacion}>✓ Agregado al carrito</p>}
+				</div>
 			</div>
 
 			<ComentarioList productoId={productoId}/>

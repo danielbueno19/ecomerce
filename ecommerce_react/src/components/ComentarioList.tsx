@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import {ComentarioDTO} from "../types";
 import {useForm} from "../hooks/useForm";
 import {agregarComentario, getComentarios} from "../services/comentarios";
+import styles from './ComentarioList.module.css'
 
 interface Props {
     productoId: number
@@ -34,7 +35,7 @@ export default function ComentarioList({productoId}: Props) {
                 contenido: values.contenido,
                 puntuacion: Number(values.puntuacion),
             })
-            setComentarios(prev => [nuevo, ...prev]) // agregar al inicio sin recargar
+            setComentarios(prev => [nuevo, ...prev])
             reset()
         } catch {
             setError('No se pudo enviar el comentario')
@@ -44,13 +45,12 @@ export default function ComentarioList({productoId}: Props) {
     }
 
     return (
-        <section style={{marginTop:'2rem'}}>
+        <section className={styles.section}>
             <h3>Comentarios ({comentarios.length})</h3>
 
-            {/* Formulario - solo visible si hay sesión */}
             {token ? (
-                <form onSubmit={handleSubmit} style={{ marginBottom: '1.5rem', padding: '1rem', background: '#a9a9a9', borderRadius: 8 }}>
-                    <div style={{ marginBottom: '0.5rem' }}>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <div className={styles.field}>
                         <label>Puntuación</label>
                         <select name="puntuacion" value={values.puntuacion} onChange={handleChange}>
                             {[5, 4, 3, 2, 1].map(n => (
@@ -58,7 +58,7 @@ export default function ComentarioList({productoId}: Props) {
                             ))}
                         </select>
                     </div>
-                    <div style={{marginBottom:'0.5rem'}}>
+                    <div className={styles.field}>
                         <textarea
                             name="contenido"
                             value={values.contenido}
@@ -66,30 +66,26 @@ export default function ComentarioList({productoId}: Props) {
                             placeholder="Escribe tu comentario"
                             required
                             rows={3}
-                            style={{width:'100%'}}
                         />
                     </div>
-                    {error && <p style={{ color: 'red', margin: '0 0 0.5rem' }}>{error}</p>}
-                    <button  type='submit' disabled={enviado}>
-                        {enviado ? 'Enviando...': 'Publicar comentario'}
+                    {error && <p className={styles.error}>{error}</p>}
+                    <button type='submit' disabled={enviado}>
+                        {enviado ? 'Enviando...' : 'Publicar comentario'}
                     </button>
                 </form>
-            ): (
-                <p style={{ color: '#6b7280' }}>
-                    <button onClick={() => navigate('/login')} style={{ background: 'none', border: 'none', color: '#3b82f6', cursor: 'pointer', padding: 0 }}>
-                        Iniciá sesión
-                    </button>
+            ) : (
+                <p className={styles.loginPrompt}>
+                    <button className={styles.loginLink} onClick={() => navigate('/login')}>Inicia sesión</button>
                     {' '}para dejar un comentario.
                 </p>
             )}
 
-            {/* Lista */}
-            {loading && <p>Cargando comentarios...</p>}
-            {!loading && comentarios.length === 0 && <p style={{ color: '#6b7280' }}>Sin comentarios aún. ¡Sé el primero!</p>}
+            {loading && <p className={styles.mensaje}>Cargando comentarios...</p>}
+            {!loading && comentarios.length === 0 && <p className={styles.mensaje}>Sin comentarios aún. ¡Sé el primero!</p>}
             {comentarios.map(c => (
-                <div key={c.id} style={{ borderBottom: '1px solid #e5e7eb', padding: '0.75rem 0' }}>
+                <div key={c.id} className={styles.item}>
                     <span>{'⭐'.repeat(c.puntuacion)}</span>
-                    <p style={{ margin: '0.25rem 0 0' }}>{c.contenido}</p>
+                    <p className={styles.itemContenido}>{c.contenido}</p>
                 </div>
             ))}
         </section>
