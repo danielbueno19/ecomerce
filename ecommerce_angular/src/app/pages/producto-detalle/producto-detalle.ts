@@ -13,6 +13,7 @@ import { Comentario } from '../../models/comentario.model';
   selector: 'app-producto-detalle',
   imports: [RouterLink, DecimalPipe, ReactiveFormsModule],
   templateUrl: './producto-detalle.html',
+  styleUrl: './producto-detalle.css',
 })
 export class ProductoDetallePage implements OnInit {
   private readonly route = inject(ActivatedRoute);

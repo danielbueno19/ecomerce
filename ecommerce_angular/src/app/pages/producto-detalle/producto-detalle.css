@@ -1,0 +1,241 @@
+.detalle {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.error {
+  color: #e94560;
+  background: #fff0f3;
+  border: 1px solid #e94560;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
+
+/* Info principal */
+.producto-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.producto-info img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  max-height: 360px;
+  grid-row: span 5;
+}
+
+.producto-info h1 {
+  font-size: 1.6rem;
+  color: #1a1a2e;
+  margin: 0 0 0.5rem;
+}
+
+.producto-info p {
+  color: #555;
+  font-size: 0.95rem;
+  margin: 0 0 0.5rem;
+}
+
+.precio {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: #e94560 !important;
+}
+
+/* Control cantidad + agregar carrito */
+.agregar-carrito {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.agregar-carrito button:first-child,
+.agregar-carrito button:nth-child(3) {
+  width: 36px;
+  height: 36px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.agregar-carrito button:first-child:hover:not(:disabled),
+.agregar-carrito button:nth-child(3):hover:not(:disabled) {
+  background: #e0e0e0;
+}
+
+.agregar-carrito span:first-of-type {
+  font-size: 1rem;
+  font-weight: 600;
+  min-width: 24px;
+  text-align: center;
+  color: #1a1a2e;
+}
+
+.agregar-carrito button:nth-child(4) {
+  background: #e94560;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.agregar-carrito button:nth-child(4):hover:not(:disabled) {
+  background: #c73652;
+}
+
+.agregar-carrito button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.confirmacion {
+  color: #2e7d32;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Comentarios */
+.comentarios {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.comentarios h2 {
+  font-size: 1.2rem;
+  color: #1a1a2e;
+  margin: 0 0 1rem;
+  border-left: 4px solid #e94560;
+  padding-left: 0.75rem;
+}
+
+.comentario {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0.75rem 0;
+}
+
+.comentario:last-of-type {
+  border-bottom: none;
+}
+
+.comentario span {
+  color: #f5a623;
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+.comentario p {
+  margin: 0.25rem 0 0;
+  color: #444;
+  font-size: 0.9rem;
+}
+
+/* Formulario comentario */
+form {
+  margin-top: 1.5rem;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 1.25rem;
+}
+
+form h3 {
+  font-size: 1rem;
+  color: #1a1a2e;
+  margin: 0 0 1rem;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.campo label {
+  font-size: 0.85rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.campo input,
+.campo textarea {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+  border-color: #e94560;
+}
+
+.error-campo {
+  font-size: 0.78rem;
+  color: #e94560;
+}
+
+form > button[type='submit'] {
+  background: #1a1a2e;
+  color: #fff;
+  border: none;
+  padding: 0.55rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+form > button[type='submit']:hover:not(:disabled) {
+  background: #e94560;
+}
+
+form > button[type='submit']:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Volver */
+.detalle > a {
+  display: inline-block;
+  color: #e94560;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.detalle > a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .producto-info {
+    grid-template-columns: 1fr;
+  }
+
+  .producto-info img {
+    grid-row: auto;
+  }
+}
