@@ -8,6 +8,7 @@ import { ProductoList } from '../../models/producto.model';
   selector: 'app-productos',
   imports: [RouterLink, DecimalPipe],
   templateUrl: './productos.html',
+  styleUrl: './productos.css',
 })
 export class ProductosPage implements OnInit {
   private readonly productoService = inject(ProductoService);

@@ -1,0 +1,133 @@
+.catalogo {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.catalogo h1 {
+  color: #1a1a2e;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #e94560;
+  padding-left: 0.75rem;
+}
+
+.error {
+  color: #e94560;
+  background: #fff0f3;
+  border: 1px solid #e94560;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
+
+/* Grid */
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Tarjeta */
+.targeta {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.targeta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+}
+
+.targeta img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.targeta h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0.75rem 1rem 0.25rem;
+  color: #1a1a2e;
+}
+
+.targeta p {
+  font-size: 0.85rem;
+  color: #555;
+  margin: 0 1rem 0.5rem;
+  flex: 1;
+}
+
+.precio {
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  color: #e94560 !important;
+  margin: 0 1rem 0.5rem !important;
+}
+
+.targeta span {
+  font-size: 0.8rem;
+  margin: 0 1rem 0.75rem;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.agotado {
+  color: #9e9e9e !important;
+}
+
+.targeta a {
+  display: block;
+  margin: 0 1rem 1rem;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: #e94560;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.targeta a:hover {
+  background-color: #c73652;
+}
+
+/* Paginación */
+.paginacion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.paginacion span {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.paginacion button {
+  background: #1a1a2e;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.paginacion button:hover:not(:disabled) {
+  background: #e94560;
+}
+
+.paginacion button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
