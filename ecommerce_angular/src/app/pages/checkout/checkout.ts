@@ -9,6 +9,7 @@ import { CarritoService } from '../../services/carrito.service';
   selector: 'app-checkout',
   imports: [ReactiveFormsModule, RouterLink, DecimalPipe],
   templateUrl: './checkout.html',
+  styleUrl: './checkout.css',
 })
 export class CheckoutPages {
   private readonly fb = inject(FormBuilder);
