@@ -1,0 +1,44 @@
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-xl) 0;
+  color: var(--color-text-muted);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 2px solid var(--color-border);
+}
+
+.total {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.acciones {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.btnVaciar {
+  background-color: transparent;
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger);
+}
+
+.btnVaciar:hover {
+  background-color: var(--color-danger);
+  color: #fff;
+}

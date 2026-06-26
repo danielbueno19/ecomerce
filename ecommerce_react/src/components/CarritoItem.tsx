@@ -1,4 +1,5 @@
 import {CarritoItemEnriquecido} from "../types";
+import styles from './CarritoItem.module.css'
 
 interface Props {
     item: CarritoItemEnriquecido
@@ -7,14 +8,14 @@ interface Props {
 
 export default function CarritoItem({item, onRemover}: Props) {
     return (
-        <div style={{display:'flex', alignItems:'center', gap:'1rem', padding:'0.75rem 0', borderBottom:'1px solid #eee'}}>
-            {item.imagen && <img src={item.imagen} alt={item.nombre} width={60}/>}
-            <div style={{flex:1}}>
-                <p style={{margin:0, fontWeight:'bold'}}>{item.nombre}</p>
-                <p style={{margin:0, color:'#555'}}>Cantidad: {item.cantidad}</p>
+        <div className={styles.item}>
+            {item.imagen && <img src={item.imagen} alt={item.nombre} className={styles.imagen}/>}
+            <div className={styles.info}>
+                <p className={styles.nombre}>{item.nombre}</p>
+                <p className={styles.cantidad}>Cantidad: {item.cantidad}</p>
             </div>
-            <p style={{minWidth:80, textAlign:'right'}}>${(item.precio * item.cantidad).toFixed(2)}</p>
-            <button onClick={()=> onRemover(item.productoId)}>Eliminar</button>
+            <p className={styles.subtotal}>${(item.precio * item.cantidad).toFixed(2)}</p>
+            <button className={styles.btnEliminar} onClick={()=> onRemover(item.productoId)}>Eliminar</button>
         </div>
     )
 }
