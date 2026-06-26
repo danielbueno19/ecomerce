@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import type {ProductoListDTO} from '../types'
 import {getProductos} from '../services/productos'
 import ProductoCard from './ProductoCard'
+import styles from './ProductoList.module.css'
 
 interface Props {
 	onVerDetalle: (id: number) => void
@@ -19,13 +20,13 @@ export default function ProductoList({onVerDetalle}: Props) {
 		.finally(() => setLoading(false))
 	}, [] )
 
-	if (loading) return <p>Cargando productos ...</p>
-	if (error) return <p>{error}</p>
+	if (loading) return <p className={styles.mensaje}>Cargando productos ...</p>
+	if (error) return <p className={styles.mensaje}>{error}</p>
 
 	return (
-		<div style = {{display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap:'1rem'}}>
+		<div className={styles.grid}>
 		{productos.map(p => (
-			<ProductoCard key = {p.id} producto={p} onVerDetalle = {onVerDetalle}/>
+			<ProductoCard key={p.id} producto={p} onVerDetalle={onVerDetalle}/>
 		))}
 		</div>
 	)

@@ -1,4 +1,5 @@
 import type {ProductoListDTO} from '../types'
+import styles from './ProductoCard.module.css'
 
 interface Props {
 	producto: ProductoListDTO
@@ -6,15 +7,17 @@ interface Props {
 }
 export default function ProductoCard({producto, onVerDetalle}: Props) {
 	return (
-		<div style = {{border: '1px solid #ccc', padding: '1rem', borderRadius: '8px'}}>
+		<div className={styles.card}>
 			{producto.imagen && (
-				<img src={producto.imagen} alt={producto.nombre} width={200}/>
+				<img src={producto.imagen} alt={producto.nombre} className={styles.imagen}/>
 			)}
-			<h3>{producto.nombre}</h3>
-			<p>{producto.descripcion}</p>
-			<p><strong>${producto.price}</strong></p>
-			<p>Stock: {producto.cantidad}</p>
-			<button onClick={()=> onVerDetalle(producto.id)}>Ver detalle</button>
+			<div className={styles.body}>
+				<h3 className={styles.nombre}>{producto.nombre}</h3>
+				<p className={styles.descripcion}>{producto.descripcion}</p>
+				<p className={styles.precio}>${producto.price}</p>
+				<p className={styles.stock}>Stock: {producto.cantidad}</p>
+				<button className={styles.btn} onClick={()=> onVerDetalle(producto.id)}>Ver detalle</button>
+			</div>
 		</div>
 	)
 }
