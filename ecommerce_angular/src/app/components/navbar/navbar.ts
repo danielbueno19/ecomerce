@@ -7,6 +7,7 @@ import { CarritoService } from '../../services/carrito.service';
   selector: 'app-navbar',
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './navbar.html',
+  styleUrl: './navbar.css',
 })
 export class NavbarComponent {
   readonly authService = inject(AuthService);

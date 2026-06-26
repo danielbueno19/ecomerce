@@ -1,25 +1,27 @@
 <nav>
-  <a routerLink="/productos" routerLinkActive="activo">Productos</a>
+  <a class="nav-brand" routerLink="/productos">🛒 ShopApp</a>
 
-  @if (authService.usuarioActual()) {
-  <!-- Links disponibles solo con sesión activa -->
-  <a routerLink="/carrito" routerLinkActive="activo">
-    Carrito
-    @if (carritoService.cantidadItems() > 0){
-      <span class="badge">{{ carritoService.cantidadItems() }}</span>
+  <div class="nav-links">
+    <a routerLink="/productos" routerLinkActive="activo">Productos</a>
+
+    @if (authService.usuarioActual()) {
+      <a routerLink="/carrito" routerLinkActive="activo">
+        Carrito
+        @if (carritoService.cantidadItems() > 0) {
+          <span class="badge">{{ carritoService.cantidadItems() }}</span>
+        }
+      </a>
+      <a routerLink="/ordenes" routerLinkActive="activo">Mis órdenes</a>
+
+      @if (authService.esAdmin()) {
+        <a routerLink="/admin" routerLinkActive="activo">Admin</a>
+      }
+
+      <span class="nav-user">{{ authService.usuarioActual()!.email }}</span>
+      <button class="btn-logout" (click)="logout()">Cerrar sesión</button>
+    } @else {
+      <a routerLink="/login" routerLinkActive="activo">Ingresar</a>
+      <a routerLink="/registro" routerLinkActive="activo">Registrarse</a>
     }
-  </a>
-  <a routerLink="/ordenes" routerLinkActive="activo">Mis órdenes</a>
-
-  <!-- Link de admin: visible solo si el rol es ADMIN -->
-  @if (authService.esAdmin()){
-  <a routerLink="/admin" routerLinkActive="activo">Admin</a>
-  }
-
-  <span>{{ authService.usuarioActual()!.email }}</span>
-  <button (click)="logout()">Cerrar sesión</button>
-  } @else {
-  <a routerLink="/login" routerLinkActive="activo">Ingresar</a>
-  <a routerLink="/registro" routerLinkActive="activo">Registrarse</a>
-  }
+  </div>
 </nav>
