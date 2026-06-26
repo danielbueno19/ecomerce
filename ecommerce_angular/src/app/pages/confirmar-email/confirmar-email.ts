@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'app-confirmar-email',
   imports: [ReactiveFormsModule],
   templateUrl: './confirmar-email.html',
+  styleUrl: '../auth.css',
 })
 export class ConfirmarEmailPage {
   private readonly fb = inject(FormBuilder);
