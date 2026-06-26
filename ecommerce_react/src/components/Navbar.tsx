@@ -1,13 +1,7 @@
 import {NavLink, useNavigate} from 'react-router-dom'
 import {useAuth} from "../context/AuthContext";
 import {useCarrito} from "../context/CarritoContext";
-
-const linkStyle = ({isActive}: {isActive: boolean}) => ({
-    marginRight: '1rem',
-    fontWeight: isActive ? 'bold': 'normal',
-    textDecoration: 'none',
-    color: isActive ? '#000': '#555',
-})
+import styles from './Navbar.module.css'
 
 export default function Navbar() {
     const {token, isAdmin, logout} = useAuth()
@@ -19,15 +13,22 @@ export default function Navbar() {
         navigate('/login')
     }
 
+    const linkClass = ({isActive}: {isActive: boolean}) =>
+        `${styles.link} ${isActive ? styles.active : ''}`
+
     return (
-        <nav style={{padding: '1rem', borderBottom: '1px solid #ccc', marginBottom: '2rem'}}>
-            <NavLink to= "/productos" style={linkStyle}>Productos</NavLink>
-            {token && <NavLink to="/carrito" style={linkStyle}>Carrito {cantidadItems > 0 && `(${cantidadItems})`}</NavLink>}
-            {token && <NavLink to="/ordenes" style={linkStyle}>Mis órdenes</NavLink>}
-            {isAdmin && <NavLink to="/admin" style={linkStyle}>Admin</NavLink>}
+        <nav className={styles.nav}>
+            <NavLink to="/productos" className={linkClass}>Productos</NavLink>
+            {token && (
+                <NavLink to="/carrito" className={linkClass}>
+                    Carrito {cantidadItems > 0 && <span className={styles.badge}>{cantidadItems}</span>}
+                </NavLink>
+            )}
+            {token && <NavLink to="/ordenes" className={linkClass}>Mis órdenes</NavLink>}
+            {isAdmin && <NavLink to="/admin" className={linkClass}>Admin</NavLink>}
             {token
-                ? <button onClick={handleLogout}>Cerrar sesion</button>
-                : <NavLink to='/login' style={linkStyle}>Iniciar sesión</NavLink>}
+                ? <button className={styles.btnLogout} onClick={handleLogout}>Cerrar sesión</button>
+                : <NavLink to='/login' className={linkClass}>Iniciar sesión</NavLink>}
         </nav>
     )
 }

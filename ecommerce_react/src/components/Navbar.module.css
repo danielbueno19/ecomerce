@@ -1,0 +1,55 @@
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding-top: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.link {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.active {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0 6px;
+  margin-left: var(--spacing-xs);
+  min-width: 1.25rem;
+  height: 1.25rem;
+}
+
+.btnLogout {
+  margin-left: auto;
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: 0.875rem;
+  background-color: transparent;
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius-md);
+}
+
+.btnLogout:hover {
+  background-color: var(--color-danger);
+  color: #fff;
+}
