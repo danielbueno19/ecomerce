@@ -1,4 +1,5 @@
 import type {EstadoOrden, OrdenDTO} from "../../types";
+import styles from './OrdenListAdmin.module.css'
 
 const ESTADOS: EstadoOrden[] = ['PREPARANDO', 'ENTREGANDO', 'ENTREGADO', 'CANCELADO']
 
@@ -21,21 +22,14 @@ export default function OrdenListAdmin({ordenes, onCambiarEstado, filtro, onFilt
     ? ordenes: ordenes.filter(o => o.estado === filtro)
 
     return (
-        <div>
+        <div className={styles.container}>
             {/* Filtro por estado */}
-            <div style={{marginBottom: '1rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap'}}>
+            <div className={styles.filters}>
                 {(['TODOS', ...ESTADOS] as const).map(e => (
                     <button
                         key={e}
                         onClick={() => onFiltro(e)}
-                        style={{
-                            padding: '0.25rem 0.75rem',
-                            borderRadius: 999,
-                            border: 'none',
-                            cursor: 'pointer',
-                            background: filtro === e ? '#1f2937' : '#e5e7eb',
-                            color: filtro === e ? '#fff' : '#374151',
-                        }}
+                        className={`${styles.filterButton} ${filtro === e ? styles.activeFilterButton : ''}`}
                     >
                         {e}
                     </button>
@@ -43,7 +37,7 @@ export default function OrdenListAdmin({ordenes, onCambiarEstado, filtro, onFilt
             </div>
 
             {ordenesFiltradas.length === 0 && (
-                <p style={{color: '#6b7280'}}>No hay órdenes con ese estado.</p>
+                <p className={styles.emptyState}>No hay órdenes con ese estado.</p>
             )}
 
             {ordenesFiltradas.map(orden => {
@@ -53,36 +47,19 @@ export default function OrdenListAdmin({ordenes, onCambiarEstado, filtro, onFilt
                 const total = orden.ordenItems.reduce((acc, i) => acc + i.precio * i.cantidad, 0)
 
                 return (
-                    <div key={orden.id} style={{
-                        border: '1px solid #e5e7eb',
-                        borderRadius: 8,
-                        padding: '1rem',
-                        marginBottom: '0.75rem'
-                    }}>
-                        <div style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            flexWrap: 'wrap',
-                            gap: '0.5rem'
-                        }}>
-
-                            <div>
-                                <span style={{fontWeight: 'bold'}}>Orden #{orden.id}</span>
-                                <span style={{color: '#6b7280', marginLeft: '0.75rem'}}>{fecha}</span>
+                    <div key={orden.id} className={styles.card}>
+                        <div className={styles.header}>
+                            <div className={styles.orderMeta}>
+                                <span className={styles.orderId}>Orden #{orden.id}</span>
+                                <span className={styles.date}>{fecha}</span>
                             </div>
 
-                            <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-                                <span style={{
-                                    background: colorEstado[orden.estado],
-                                    color: '#fff',
-                                    padding: '0.2rem 0.6rem',
-                                    borderRadius: 999,
-                                    fontSize: '0.8rem',
-                                }}>
+                            <div className={styles.actions}>
+                                <span className={styles.badge} style={{ background: colorEstado[orden.estado] }}>
                                   {orden.estado}
                                 </span>
                                 <select
+                                    className={styles.select}
                                     value={orden.estado}
                                     onChange={e => onCambiarEstado(orden.id, e.target.value as EstadoOrden)}
                                 >
@@ -93,7 +70,7 @@ export default function OrdenListAdmin({ordenes, onCambiarEstado, filtro, onFilt
                             </div>
                         </div>
 
-                        <p style={{margin: '0.5rem 0 0', color: '#374151'}}>
+                        <p className={styles.summary}>
                             📍 {orden.direccion} ·
                             📞 {orden.telefono} · <strong>${total.toFixed(2)}</strong> · {orden.ordenItems.length} item(s)
                         </p>
