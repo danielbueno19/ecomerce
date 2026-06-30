@@ -1,5 +1,6 @@
 import {CarritoItemEnriquecido} from "../types";
 import styles from './CarritoItem.module.css'
+import { resolveImageUrl } from '../utils/imagenes'
 
 interface Props {
     item: CarritoItemEnriquecido
@@ -7,9 +8,11 @@ interface Props {
 }
 
 export default function CarritoItem({item, onRemover}: Props) {
+    const imagenSrc = item.imagen ? resolveImageUrl(item.imagen) : undefined
+
     return (
         <div className={styles.item}>
-            {item.imagen && <img src={item.imagen} alt={item.nombre} className={styles.imagen}/>}
+            {imagenSrc && <img src={imagenSrc} alt={item.nombre} className={styles.imagen}/>}
             <div className={styles.info}>
                 <p className={styles.nombre}>{item.nombre}</p>
                 <p className={styles.cantidad}>Cantidad: {item.cantidad}</p>

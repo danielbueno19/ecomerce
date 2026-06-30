@@ -6,6 +6,7 @@ import {useCarrito} from "../context/CarritoContext";
 import {useNavigate} from "react-router-dom";
 import ComentarioList from "./ComentarioList";
 import styles from './ProductoDetalle.module.css'
+import { resolveImageUrl } from '../utils/imagenes'
 
 interface Props {
 	productoId: number
@@ -47,12 +48,14 @@ export default function ProductoDetalle({productoId, onVolver}: Props) {
 	if (error) return <p className={styles.mensaje}>{error}</p>
 	if (!producto) return null
 
+	const imagenSrc = producto.imagen ? resolveImageUrl(producto.imagen) : undefined
+
 	return (
 		<div className={styles.container}>
 			<button className={styles.btnVolver} onClick={onVolver}>← Volver</button>
 
 			<div className={styles.detalle}>
-				{producto.imagen && <img src={producto.imagen} alt={producto.nombre} className={styles.imagen}/>}
+				{imagenSrc && <img src={imagenSrc} alt={producto.nombre} className={styles.imagen}/>}
 				<div className={styles.info}>
 					<h2>{producto.nombre}</h2>
 					<p>{producto.descripcion}</p>

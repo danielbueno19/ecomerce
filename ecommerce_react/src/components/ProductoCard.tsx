@@ -1,15 +1,18 @@
 import type {ProductoListDTO} from '../types'
 import styles from './ProductoCard.module.css'
+import { resolveImageUrl } from '../utils/imagenes'
 
 interface Props {
 	producto: ProductoListDTO
 	onVerDetalle: (id:number) => void
 }
 export default function ProductoCard({producto, onVerDetalle}: Props) {
+	const imagenSrc = producto.imagen ? resolveImageUrl(producto.imagen) : undefined
+
 	return (
 		<div className={styles.card}>
-			{producto.imagen && (
-				<img src={producto.imagen} alt={producto.nombre} className={styles.imagen}/>
+			{imagenSrc && (
+				<img src={imagenSrc} alt={producto.nombre} className={styles.imagen}/>
 			)}
 			<div className={styles.body}>
 				<h3 className={styles.nombre}>{producto.nombre}</h3>
