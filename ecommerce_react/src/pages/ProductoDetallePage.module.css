@@ -1,0 +1,11 @@
+.page {
+  padding: 1rem 0;
+}
+
+.message {
+  padding: 1rem;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-weight: 600;
+}

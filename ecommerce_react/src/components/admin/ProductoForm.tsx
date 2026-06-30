@@ -1,6 +1,7 @@
 import {ProductoDTO} from "../../types";
 import {useForm} from "../../hooks/useForm";
 import React, {useState} from "react";
+import styles from './ProductoForm.module.css'
 
 interface Props {
     productoInicial?: ProductoDTO
@@ -39,41 +40,42 @@ export default function ProductoForm({productoInicial, onSubmit, onCancelar}: Pr
     }
 
     return (
-        <form onSubmit={handleSubmit} style={{maxWidth:500}}>
-            <div style={{marginBottom:'0.75rem'}}>
-                <label>Nombre</label>
-                <input name="nombre" value={values.nombre} onChange={handleChange} required style={{width:'100%'}}/>
+        <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.field}>
+                <label className={styles.label}>Nombre</label>
+                <input className={styles.input} name="nombre" value={values.nombre} onChange={handleChange} required />
             </div>
 
-            <div style={{ marginBottom: '0.75rem' }}>
-                <label>Descripción</label><br />
-                <textarea name="descripcion" value={values.descripcion} onChange={handleChange} required rows={3} style={{ width: '100%' }} />
+            <div className={styles.field}>
+                <label className={styles.label}>Descripción</label>
+                <textarea className={styles.textarea} name="descripcion" value={values.descripcion} onChange={handleChange} required rows={3} />
             </div>
 
-            <div style={{ marginBottom: '0.75rem' }}>
-                <label>Precio</label><br />
-                <input name="precio" type="number" step="0.01" value={values.precio} onChange={handleChange} required style={{ width: '100%' }} />
+            <div className={styles.field}>
+                <label className={styles.label}>Precio</label>
+                <input className={styles.input} name="precio" type="number" step="0.01" value={values.precio} onChange={handleChange} required />
             </div>
 
-            <div style={{ marginBottom: '0.75rem' }}>
-                <label>Stock</label><br />
-                <input name="cantidad" type="number" value={values.cantidad} onChange={handleChange} required style={{ width: '100%' }} />
+            <div className={styles.field}>
+                <label className={styles.label}>Stock</label>
+                <input className={styles.input} name="cantidad" type="number" value={values.cantidad} onChange={handleChange} required />
             </div>
 
-            <div style={{ marginBottom: '1rem' }}>
-                <label>Imagen {productoInicial?.imagen && '(actual: ' + productoInicial.imagen + ')'}</label><br />
+            <div className={styles.field}>
+                <label className={styles.label}>Imagen {productoInicial?.imagen && '(actual: ' + productoInicial.imagen + ')'}</label>
                 <input
+                    className={styles.fileInput}
                     type="file"
                     accept="image/*"
                     onChange={e => setImagen(e.target.files?.[0])}
                 />
             </div>
 
-            {error && <p style={{color:'red'}}>{error}</p>}
+            {error && <p className={styles.error}>{error}</p>}
 
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-                <button type="button" onClick={onCancelar} disabled={loading}>Cancelar</button>
-                <button type="submit" disabled={loading}>
+            <div className={styles.actions}>
+                <button className={styles.cancelBtn} type="button" onClick={onCancelar} disabled={loading}>Cancelar</button>
+                <button className={styles.submitBtn} type="submit" disabled={loading}>
                     {loading ? 'Guardando...' : (productoInicial ? 'Actualizar' : 'Crear')}
                 </button>
             </div>

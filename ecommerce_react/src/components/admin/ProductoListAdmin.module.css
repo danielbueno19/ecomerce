@@ -1,0 +1,53 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+.headerRow {
+  border-bottom: 2px solid #e5e7eb;
+  text-align: left;
+}
+
+.headerCell {
+  padding: 0.8rem 0.75rem;
+  font-weight: 700;
+  color: #374151;
+}
+
+.row {
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.cell {
+  padding: 0.8rem 0.75rem;
+  color: #4b5563;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.editBtn,
+.deleteBtn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.editBtn {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.deleteBtn {
+  background: #fee2e2;
+  color: #b91c1c;
+}
