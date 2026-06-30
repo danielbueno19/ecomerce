@@ -1,30 +1,67 @@
-# React + TypeScript + Vite
+# Ecommerce Fullstack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto representa una tienda en línea moderna, construida con React, TypeScript y Vite, pensada para ofrecer una experiencia de compra completa desde la navegación del catálogo hasta el proceso de pago y la gestión administrativa.
 
-Currently, two official plugins are available:
+No es solo una interfaz bonita: es una aplicación con arquitectura de frontend clara, rutas protegidas, contexto global para autenticación y carrito, y una experiencia pensada para que el usuario se sienta inmerso desde el primer clic.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Características principales
 
-## Expanding the ESLint configuration
+- Catálogo de productos con vista detallada
+- Carrito de compras dinámico y persistente en la sesión del usuario
+- Proceso de checkout con flujo orientado a la conversión
+- Historial de órdenes para usuarios autenticados
+- Sistema de login y registro con manejo de autenticación
+- Panel administrativo para gestionar productos y órdenes
+- Diseño modular con componentes reutilizables y estilos por componente
+- Comunicación con un backend REST mediante Axios
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tecnologías utilizadas
 
-- Configure the top-level `parserOptions` property like this:
+- React 18
+- TypeScript
+- Vite
+- React Router DOM
+- Axios
+- CSS Modules para estilos encapsulados
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Estructura del proyecto
+
+- src/components: componentes reutilizables de la interfaz
+- src/pages: vistas principales de la aplicación
+- src/context: manejo de autenticación y carrito con React Context
+- src/services: integración con la API del backend
+- src/types: modelos y tipos compartidos
+- src/hooks: lógica reutilizable de formularios y estado
+
+## Instalación
+
+1. Clona el repositorio
+2. Instala las dependencias:
+
+```bash
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+3. Inicia el servidor de desarrollo:
+
+```bash
+npm run dev
+```
+
+4. Abre la aplicación en tu navegador en la URL que indique Vite.
+
+## Scripts disponibles
+
+- npm run dev: inicia el entorno de desarrollo
+- npm run build: compila la aplicación para producción
+- npm run preview: previsualiza el build generado
+- npm run lint: ejecuta la revisión de código con ESLint
+
+## Estado del proyecto
+
+Este frontend está preparado para funcionar junto a un backend REST que expone productos, autenticación, carrito, órdenes y gestión administrativa. La arquitectura está organizada para escalar con facilidad y mantener una base sólida para futuras mejoras.
+
+## Motivación
+
+La idea detrás de este proyecto no era solo construir un ecommerce básico, sino demostrar cómo combinar una interfaz moderna, experiencia de usuario cuidada y una organización de código profesional en una sola aplicación.
+
