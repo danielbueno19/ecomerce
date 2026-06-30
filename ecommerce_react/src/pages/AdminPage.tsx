@@ -5,6 +5,7 @@ import ProductoListAdmin from "../components/admin/ProductoListAdmin";
 import ProductoForm from "../components/admin/ProductoForm";
 import {actualizarEstadoOrden, obtenerTodasOrdenes} from "../services/ordenes";
 import OrdenListAdmin from "../components/admin/OrdenListAdmin";
+import styles from './AdminPage.module.css'
 
 type Vista = 'lista' | 'crear' | 'editar'
 type Seccion = 'productos' | 'ordenes'
@@ -75,19 +76,19 @@ export default function AdminPage() {
     }
 
     return (
-        <div>
-            <h2>Panel de administración</h2>
+        <div className={styles.page}>
+            <h2 className={styles.title}>Panel de administración</h2>
             {/* Selector de sección */}
-            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem' }}>
+            <div className={styles.tabs}>
                 <button
+                    className={`${styles.tabButton} ${seccion === 'productos' ? styles.activeTab : ''}`}
                     onClick={() => setSeccion('productos')}
-                    style={{ fontWeight: seccion === 'productos' ? 'bold' : 'normal' }}
                 >
                     Productos
                 </button>
                 <button
+                    className={`${styles.tabButton} ${seccion === 'ordenes' ? styles.activeTab : ''}`}
                     onClick={() => { setSeccion('ordenes'); cargarOrdenes() }}
-                    style={{ fontWeight: seccion === 'ordenes' ? 'bold' : 'normal' }}
                 >
                     Órdenes
                 </button>
@@ -98,8 +99,8 @@ export default function AdminPage() {
                 <>
                     {vista === 'lista' && (
                         <>
-                            <button onClick={() => setVista('crear')} style={{ marginBottom: '1rem' }}>+ Crear producto</button>
-                            {loading ? <p>Cargando...</p> : (
+                            <button className={styles.createButton} onClick={() => setVista('crear')}>+ Crear producto</button>
+                            {loading ? <p className={styles.loadingText}>Cargando...</p> : (
                                 <ProductoListAdmin
                                     productos={productos}
                                     onEditar={abrirEdicion}
@@ -110,13 +111,13 @@ export default function AdminPage() {
                     )}
                     {vista === 'crear' && (
                         <>
-                            <h3>Crear producto</h3>
+                            <h3 className={styles.sectionTitle}>Crear producto</h3>
                             <ProductoForm onSubmit={handleCrear} onCancelar={() => setVista('lista')} />
                         </>
                     )}
                     {vista === 'editar' && productoEditando && (
                         <>
-                            <h3>Editar producto</h3>
+                            <h3 className={styles.sectionTitle}>Editar producto</h3>
                             <ProductoForm
                                 productoInicial={productoEditando}
                                 onSubmit={handleEditar}
@@ -130,8 +131,8 @@ export default function AdminPage() {
             {/* Sección órdenes */}
             {seccion === 'ordenes' && (
                 <>
-                    <h3>Órdenes ({ordenes.length})</h3>
-                    {loadingOrdenes ? <p>Cargando órdenes...</p> : (
+                    <h3 className={styles.sectionTitle}>Órdenes ({ordenes.length})</h3>
+                    {loadingOrdenes ? <p className={styles.loadingText}>Cargando órdenes...</p> : (
                         <OrdenListAdmin
                             ordenes={ordenes}
                             onCambiarEstado={handleCambiarEstado}

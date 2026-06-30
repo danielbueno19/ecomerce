@@ -1,0 +1,52 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.title {
+  margin: 0;
+  color: #111827;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.tabButton {
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  background: #fff;
+  color: #374151;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.activeTab {
+  background: #111827;
+  color: #fff;
+  border-color: #111827;
+}
+
+.sectionTitle {
+  margin: 0;
+  color: #111827;
+}
+
+.createButton {
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  background: #16a34a;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.loadingText {
+  color: #6b7280;
+}
