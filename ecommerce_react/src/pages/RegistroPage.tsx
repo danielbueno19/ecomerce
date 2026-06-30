@@ -3,6 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "../hooks/useForm";
 import React, {useState} from "react";
 import api from "../services/api";
+import styles from './RegistroPage.module.css'
 
 export default function RegistroPage() {
     const {registrar} = useAuth()
@@ -46,21 +47,22 @@ export default function RegistroPage() {
 
     if (esperandoConfirmacion) {
         return (
-            <div style={{ maxWidth: 400, margin: '0 auto' }}>
-                <h2>Confirmá tu email</h2>
+            <div className={styles.page}>
+                <h2 className={styles.title}>Confirmá tu email</h2>
                 <p>Te enviamos un código a <strong>{values.email}</strong></p>
-                <form onSubmit={handleConfirmacion}>
-                    <div>
-                        <label>Código de confirmación</label>
+                <form className={styles.form} onSubmit={handleConfirmacion}>
+                    <div className={styles.field}>
+                        <label className={styles.label}>Código de confirmación</label>
                         <input
+                            className={styles.input}
                             name="codigoConfirmacion"
                             value={confirmValues.codigoConfirmacion}
                             onChange={handleConfirmChange}
                             required
                         />
                     </div>
-                    {error && <p style={{ color: 'red' }}>{error}</p>}
-                    <button type="submit" disabled={loading}>
+                    {error && <p className={styles.error}>{error}</p>}
+                    <button className={styles.button} type="submit" disabled={loading}>
                         {loading ? 'Verificando...' : 'Confirmar'}
                     </button>
                 </form>
@@ -69,23 +71,23 @@ export default function RegistroPage() {
     }
 
     return (
-        <div style={{ maxWidth: 400, margin: '0 auto' }}>
-            <h2>Crear cuenta</h2>
-            <form onSubmit={handleRegistro}>
-                <div>
-                    <label>Email</label>
-                    <input name="email" type="email" value={values.email} onChange={handleChange} required />
+        <div className={styles.page}>
+            <h2 className={styles.title}>Crear cuenta</h2>
+            <form className={styles.form} onSubmit={handleRegistro}>
+                <div className={styles.field}>
+                    <label className={styles.label}>Email</label>
+                    <input className={styles.input} name="email" type="email" value={values.email} onChange={handleChange} required />
                 </div>
-                <div>
-                    <label>Contraseña</label>
-                    <input name="password" type="password" value={values.password} onChange={handleChange} required />
+                <div className={styles.field}>
+                    <label className={styles.label}>Contraseña</label>
+                    <input className={styles.input} name="password" type="password" value={values.password} onChange={handleChange} required />
                 </div>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                <button type="submit" disabled={loading}>
+                {error && <p className={styles.error}>{error}</p>}
+                <button className={styles.button} type="submit" disabled={loading}>
                     {loading ? 'Registrando...' : 'Registrarse'}
                 </button>
             </form>
-            <p>¿Ya tenés cuenta? <Link to="/login">Iniciá sesión</Link></p>
+            <p className={styles.helper}>¿Ya tenés cuenta? <Link className={styles.link} to="/login">Iniciá sesión</Link></p>
         </div>
     )
 }
